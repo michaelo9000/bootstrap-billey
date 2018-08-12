@@ -1,0 +1,7 @@
+*
+
+!.gitignore
+!*/
+!*.cs
+!*.sln
+!*.csproj
