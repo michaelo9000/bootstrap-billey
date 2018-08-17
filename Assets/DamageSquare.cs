@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageSquare : Interactor{
+public class DamageSquare : SentientBeing{
 
     public SpriteRenderer sprite;
     public Color idleColor;
     public Color activeColor;
-    public int totalFlashes;
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        AddCollision(collision.gameObject);
+        AddOrUpdateCollision(collision.gameObject);
         sprite.color = activeColor;
-        DamageCollisions(5);
+        if(collision.GetComponent<SentientBeing>())
+        {
+            DamageCollisions(5);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
