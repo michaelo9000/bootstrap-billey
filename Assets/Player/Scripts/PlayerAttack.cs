@@ -9,11 +9,13 @@ public class PlayerAttack : MonoBehaviour {
     public GameObject attackBox;
     public float attackDelayFrames;
     public float attackFrames;
+    public float attackStamina;
     WaitForEndOfFrame waitFrame = new WaitForEndOfFrame();
     
     public void DoAttack()
     {
-        StartCoroutine(IAttack());
+        if(gameObject.GetComponent<SentientBeing>().TestStaminaAction(attackStamina))
+            StartCoroutine(IAttack());
     }
 
     IEnumerator IAttack()
@@ -27,6 +29,7 @@ public class PlayerAttack : MonoBehaviour {
                 windingUp = false;
             frameCount++;
         }
+        gameObject.GetComponent<SentientBeing>().DoStaminaAction(attackStamina);
         attacking = true; 
         var atk = Instantiate(attackBox, transform);
         yield return new WaitForSeconds(attackFrames / 60);

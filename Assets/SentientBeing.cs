@@ -7,28 +7,52 @@ public class SentientBeing : MonoBehaviour {
     
     public float health;
     float minHealth;
+    float usedStamina;
     public Text healthHUD;
+    public Text staminaHUD;
+    Coroutine restoringStamina;
+    public float staminaRestoreDelay;
+    WaitForSeconds waitStaminaRestoreDelay;
+    public float staminaRestoreRate;
+    WaitForSeconds waitStaminaRestoreRate;
     private void Start()
     {
         minHealth = health * .2f;
-        healthHUD.text = health.ToString();
+        UpdateHealthAndStamina(0,0);
+        waitStaminaRestoreDelay = new WaitForSeconds(staminaRestoreDelay);
+        waitStaminaRestoreRate = new WaitForSeconds(staminaRestoreRate);
+    }
+    public bool TestStaminaAction(float staminaCost)
+    {
+        return (health - staminaCost > minHealth);
     }
     public bool DoStaminaAction(float staminaCost)
     {
         if (health - staminaCost < minHealth)
             return false;
-        ChangeHealth(-staminaCost);
+        UpdateHealthAndStamina(-staminaCost, staminaCost);
+        if(restoringStamina != null) StopCoroutine(restoringStamina);
+        restoringStamina = StartCoroutine(RestoreStamina(-staminaCost));
         return true;
     }
-    public float ChangeHealth(float amount)
+    void UpdateHealthAndStamina(float healthAmount, float staminaAmount)
     {
-        health += amount;
-        healthHUD.text = health.ToString();
-        return health;
+        health += healthAmount;
+        usedStamina += staminaAmount;
+        if(healthHUD) healthHUD.text = health.ToString();
+        if(staminaHUD) staminaHUD.text = usedStamina.ToString();
+    }
+    IEnumerator RestoreStamina(float amount)
+    {
+        yield return waitStaminaRestoreDelay;
+        while(usedStamina > 0){
+            UpdateHealthAndStamina(1, -1);
+            yield return waitStaminaRestoreRate;
+        }
     }
     public GameObject TakeDamage(float amount, GameObject HitMeObject)
     {
-        ChangeHealth(-amount);
+        UpdateHealthAndStamina(-amount, 0);
         if (health <= 0)
         {
             // Destroy(gameObject);
@@ -52,7 +76,7 @@ public class SentientBeing : MonoBehaviour {
                 }
             }
         }
-        ChangeHealth(healthToRestore);
+        UpdateHealthAndStamina(healthToRestore, 0);
         return healthToRestore;
     }
     private class MyEnemy
