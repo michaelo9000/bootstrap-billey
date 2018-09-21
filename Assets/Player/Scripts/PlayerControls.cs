@@ -12,7 +12,7 @@ public class PlayerControls : MonoBehaviour {
         playerAttack = GetComponent<PlayerAttack>();
 	}
 	
-	void Update () {
+	void FixedUpdate () {
 
         playerMove.Move(Input.GetAxis("Horizontal"));
 

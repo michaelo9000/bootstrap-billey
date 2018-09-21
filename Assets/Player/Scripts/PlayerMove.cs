@@ -5,37 +5,35 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour {
 
     public Rigidbody2D myBody;
-    public CapsuleCollider2D myCollider;
+    SentientBeing _SentientBeing;
     WaitForEndOfFrame waitFrame = new WaitForEndOfFrame();
-
     public float moveSpeed;
-    public float moveLerp;
     Vector2 startPos;
-
     public Vector2 jumpPower;
     public static bool grounded;
-
     public static bool rolling;
-    public int rollFrames;
 
     private void Start()
     {
         startPos = transform.position;
+        _SentientBeing = gameObject.GetComponent<SentientBeing>();
     }
 
     public void Move(float h)
     {
-        var pos = transform.position;
-        transform.position = Vector2.Lerp(pos, new Vector2(pos.x + h * moveSpeed * (rolling ? 2 : 1), pos.y), 1 / moveLerp);
-        if (h != 0 && Mathf.Sign(h) != transform.localScale.x)
-            transform.localScale = new Vector3(Mathf.Sign(h), 1, 1);
+        if(h != 0)
+        {
+            myBody.velocity = new Vector2(h * moveSpeed, myBody.velocity.y);
+            //flip x axis
+            if (h != 0 && Mathf.Sign(h) != transform.localScale.x)
+                transform.localScale = new Vector3(Mathf.Sign(h), 1, 1);
+        }
     }
 
     public void Jump()
     {
         if (!grounded)
             return;
-        myBody.velocity = Vector2.zero;
         myBody.AddForce(jumpPower, ForceMode2D.Impulse);
     }
 
@@ -58,15 +56,13 @@ public class PlayerMove : MonoBehaviour {
 
     IEnumerator IRoll()
     {
-        myCollider.enabled = false;
-        int frameCount = 0;
         while (rolling)
         {
-            yield return waitFrame;
-            if (frameCount > rollFrames)
+            if (_SentientBeing.TestStaminaAction(1))
+                _SentientBeing.DoStaminaAction(1);
+            else
                 rolling = false;
-            frameCount++;
+            yield return waitFrame;
         }
-        myCollider.enabled = true;
     }
 }

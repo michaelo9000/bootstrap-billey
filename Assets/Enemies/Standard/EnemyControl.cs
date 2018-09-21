@@ -6,27 +6,30 @@ public class EnemyControl : MonoBehaviour {
 
     public Animator anim;
     public new SpriteRenderer renderer;
-
     Transform player;
     public bool movingToPlayer;
     public float framesBetweenPositionChecks;
     public float noticePlayerProximity;
-    public float enemyLerp;
+    public float movementLerp;
+    Rigidbody2D myBody;
 
-    public float health;
-
-    private void Start()
-    {
+    void Start () {
+        myBody = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         RepeatingEvents.RegisterMethod(this, "CheckDistanceToPlayer", 30, 0);
     }
     
-    void Update ()
+    void FixedUpdate ()
     {
         if (movingToPlayer)
-        {
-            transform.position = Vector2.Lerp(transform.position, new Vector2(player.position.x, transform.position.y), 1 / enemyLerp);
-            renderer.flipX = transform.position.x - player.position.x > 0;
+        {   
+            //get difference between me and player
+            var newPos = new Vector2(
+                player.position.x - myBody.position.x,
+                player.position.y - myBody.position.y
+            );
+            myBody.MovePosition(myBody.position + newPos * Time.deltaTime * movementLerp);
+            renderer.flipX = myBody.position.x - player.position.x > 0;
         }
 	}
 
