@@ -6,63 +6,81 @@ public class PlayerMove : MonoBehaviour {
 
     public Rigidbody2D myBody;
     SentientBeing _SentientBeing;
-    WaitForEndOfFrame waitFrame = new WaitForEndOfFrame();
     public float moveSpeed;
-    Vector2 startPos;
-    public Vector2 jumpPower;
+    public int jumpForce;
+    public int rollForce;
     public static bool grounded;
-    public static bool rolling;
+    bool rolling;
 
     private void Start()
     {
-        startPos = transform.position;
         _SentientBeing = gameObject.GetComponent<SentientBeing>();
     }
 
     public void Move(float h)
     {
-        if(h != 0)
+        if(h != 0 && !rolling) //todo need to be able to change facing even when ducking
         {
             myBody.velocity = new Vector2(h * moveSpeed, myBody.velocity.y);
             //flip x axis
             if (h != 0 && Mathf.Sign(h) != transform.localScale.x)
                 transform.localScale = new Vector3(Mathf.Sign(h), 1, 1);
         }
+    }    
+    public void Duck()
+    {
+        rolling = true;
+        Debug.Log("duck");
+    }
+    public void DropEvade()
+    {
+        Debug.Log("drop");
+    }
+    public void RollEvade()
+    {
+        Debug.Log("roll");
+        myBody.AddForce(Vector2.right * transform.localScale.x * rollForce, ForceMode2D.Impulse);
+    }
+    public void StandUp()
+    {
+        rolling = false;
+        Debug.Log("stand");
     }
 
     public void Jump()
     {
         if (!grounded)
             return;
-        myBody.AddForce(jumpPower, ForceMode2D.Impulse);
+        myBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
-
-    public void HitGround()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        grounded = true;
+        if (collision.gameObject.tag == "Ground")
+            grounded = true;
     }
-
-    public void LeftGround()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        grounded = false;
-    }
-
-    public void Roll(bool _rolling)
-    {
-        rolling = _rolling;
-        if (rolling)
-            StartCoroutine(IRoll());
-    }
-
-    IEnumerator IRoll()
-    {
-        while (rolling)
-        {
-            if (_SentientBeing.TestStaminaAction(1))
-                _SentientBeing.DoStaminaAction(1);
-            else
-                rolling = false;
-            yield return waitFrame;
-        }
+        if (collision.gameObject.tag == "Ground")
+            grounded = false;
     }
 }
+
+
+// public void Roll(bool _rolling)
+// {
+//     rolling = _rolling;
+//     if (rolling)
+//         StartCoroutine(IRoll());
+// }
+
+// IEnumerator IRoll()
+// {
+//     while (rolling)
+//     {
+//         if (_SentientBeing.TestStaminaAction(1))
+//             _SentientBeing.DoStaminaAction(1);
+//         else
+//             rolling = false;
+//         yield return waitFrame;
+//     }
+// }
