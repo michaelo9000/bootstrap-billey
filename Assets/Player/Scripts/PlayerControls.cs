@@ -11,6 +11,7 @@ public class PlayerControls : MonoBehaviour {
     WaitForEndOfFrame frameWait = new WaitForEndOfFrame();
     Coroutine EvadeCoroutine;
     public int evadeHeldFrames = 0;
+    public SpriteRenderer rollIndicator;
 
     void Start () {
         playerMove = GetComponent<PlayerMove>();
@@ -20,25 +21,42 @@ public class PlayerControls : MonoBehaviour {
     {
         playerMove.Move(Input.GetAxis("Horizontal"));
 
-        if (Input.GetButton("Jump"))
+        if (Input.GetButtonDown("Jump"))
             playerMove.Jump();
 
         if (Input.GetButtonDown("Evade"))
         {
-            playerMove.Duck();
+            if (playerMove.stature == PlayerMove.Stature.standing)
+                playerMove.DuckEvade();
             EvadeCoroutine = StartCoroutine(CheckEvadeInput());
+        }
+
+        if(Input.GetButton("Evade"))
+        {
+            if(evadeHeldFrames > buttonTapFrames && evadeHeldFrames < buttonHoldFrames)
+                rollIndicator.color = Color.cyan;
+            else 
+                rollIndicator.color = Color.white;
         }
 
         if (Input.GetButtonUp("Evade"))
         {
             StopCoroutine(EvadeCoroutine);
             if (evadeHeldFrames < buttonTapFrames)
-                playerMove.DropEvade();
+            {
+                if (playerMove.stature == PlayerMove.Stature.dropped)
+                    playerMove.StandUp();
+                else
+                    playerMove.DropEvade();
+            }
             else if (evadeHeldFrames < buttonHoldFrames)
+            {
                 playerMove.RollEvade();
+            }
             else 
                 playerMove.StandUp();
             evadeHeldFrames = 0;
+            rollIndicator.color = Color.white;
         }
 
         if (Input.GetButtonDown("Attack"))
