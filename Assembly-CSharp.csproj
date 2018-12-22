@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>4</LangVersion>
@@ -8,7 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace/>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{4A82631F-2C24-771A-F719-731A34A43070}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -38,11 +38,11 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-    <Reference Include="System.XML"/>
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Runtime.Serialization"/>
-    <Reference Include="System.Xml.Linq"/>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
@@ -51,45 +51,53 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\DamageSquare.cs"/>
-    <Compile Include="Assets\Enemies\SpawnEnemies.cs"/>
-    <Compile Include="Assets\Enemies\Standard\EnemyControl.cs"/>
-    <Compile Include="Assets\Game\Unused\Extensions.cs"/>
-    <Compile Include="Assets\Game\FrameCounter.cs"/>
-    <Compile Include="Assets\Game\GameLord.cs"/>
-    <Compile Include="Assets\Game\LerpCamera.cs"/>
-    <Compile Include="Assets\Game\RepeatingEvents.cs"/>
-    <Compile Include="Assets\Game\Unused\DoesDamage.cs"/>
-    <Compile Include="Assets\Game\Unused\moveBeast.cs"/>
-    <Compile Include="Assets\Game\Unused\MoveCamera.cs"/>
-    <Compile Include="Assets\Game\Unused\TakesDamage.cs"/>
-    <Compile Include="Assets\Game\Unused\winScri.cs"/>
-    <Compile Include="Assets\Player\Scripts\PlayerAttack.cs"/>
-    <Compile Include="Assets\Player\Scripts\PlayerControls.cs"/>
-    <Compile Include="Assets\Player\Scripts\PlayerMove.cs"/>
-    <Compile Include="Assets\PlayerWeapon.cs"/>
-    <Compile Include="Assets\SentientBeing.cs"/>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TestRunner">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Timeline">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.HoloLens">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
-    </Reference>
+     <Compile Include="Assets\DamageSquare.cs" />
+     <Compile Include="Assets\Enemies\SpawnEnemies.cs" />
+     <Compile Include="Assets\Enemies\Standard\EnemyControl.cs" />
+     <Compile Include="Assets\Game\FrameCounter.cs" />
+     <Compile Include="Assets\Game\GameLord.cs" />
+     <Compile Include="Assets\Game\LerpCamera.cs" />
+     <Compile Include="Assets\Game\RepeatingEvents.cs" />
+     <Compile Include="Assets\Game\Unused\DoesDamage.cs" />
+     <Compile Include="Assets\Game\Unused\Extensions.cs" />
+     <Compile Include="Assets\Game\Unused\moveBeast.cs" />
+     <Compile Include="Assets\Game\Unused\MoveCamera.cs" />
+     <Compile Include="Assets\Game\Unused\TakesDamage.cs" />
+     <Compile Include="Assets\Game\Unused\winScri.cs" />
+     <Compile Include="Assets\Player\Scripts\PlayerAttack.cs" />
+     <Compile Include="Assets\Player\Scripts\PlayerControls.cs" />
+     <Compile Include="Assets\Player\Scripts\PlayerMove.cs" />
+     <Compile Include="Assets\PlayerWeapon.cs" />
+     <Compile Include="Assets\SentientBeing.cs" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.TestRunner">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Timeline">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.HoloLens">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ </Reference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
 </Project>
