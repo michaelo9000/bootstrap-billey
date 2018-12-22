@@ -30,12 +30,13 @@ public class PlayerMove : MonoBehaviour {
     }
     public void Move(float h)
     {
+        // Define player's velocity 
         if(h != 0 && stature != Stature.rolling)
         {
             var moveSpeedMod = stature == Stature.ducked || stature == Stature.dropped ? .2f : 1;
             myBody.velocity = new Vector2(h * moveSpeed * moveSpeedMod, myBody.velocity.y);
         }
-        //flip x axis
+        // Check if the player's facing direction needs to be flipped
         if (h != 0 && Mathf.Sign(h) != transform.localScale.x)
             transform.localScale = new Vector3(Mathf.Sign(h), 1, 1);
     }    

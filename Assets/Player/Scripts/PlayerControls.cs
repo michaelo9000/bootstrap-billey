@@ -62,6 +62,11 @@ public class PlayerControls : MonoBehaviour {
         if (Input.GetButtonDown("Attack"))
             playerAttack.DoAttack();
     }
+    // TODO make generic, for other button hold checking
+    /// <summary>
+    /// Starts on button down, counts the number of frames continuously and stops on button up. 
+    /// Used to get how long the button was held for.
+    /// </summary>
     IEnumerator CheckEvadeInput(){
         while(true){
             yield return frameWait;

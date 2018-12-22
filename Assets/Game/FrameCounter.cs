@@ -10,7 +10,7 @@ public class FrameCounter : MonoBehaviour {
 
     private IEnumerator Start()
     {
-        while (1 == 1)
+        while (true)
         {
             totalFramesOneSecondAgo = Time.frameCount;
             yield return new WaitForSeconds(1);
