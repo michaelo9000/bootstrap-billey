@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public static class Ext {
+public static class Extensions {
 
     public static Vector2 As2D(this Vector3 vector)
     {
