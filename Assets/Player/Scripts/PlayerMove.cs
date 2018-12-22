@@ -18,10 +18,12 @@ public class PlayerMove : MonoBehaviour {
     SentientBeing _SentientBeing;
     public float moveSpeed;
     public int jumpForce;
-    public int rollForce;
+    public float rollSpeedModConst;
+    float? rollSpeedMod;
+    public int rollFrames;
     public static bool grounded;
-    bool rolling;
     public Stature stature = Stature.standing;
+    WaitForEndOfFrame frameWait = new WaitForEndOfFrame();
     private void Start()
     {
         _SentientBeing = gameObject.GetComponent<SentientBeing>();
@@ -30,11 +32,14 @@ public class PlayerMove : MonoBehaviour {
     }
     public void Move(float h)
     {
+        // If the player is rolling, set 'h' to its max value
+        if (stature == Stature.rolling) 
+            h = 1 * transform.localScale.x;
         // Define player's velocity 
-        if(h != 0 && stature != Stature.rolling)
+        if(h != 0)
         {
             var moveSpeedMod = stature == Stature.ducked || stature == Stature.dropped ? .2f : 1;
-            myBody.velocity = new Vector2(h * moveSpeed * moveSpeedMod, myBody.velocity.y);
+            myBody.velocity = new Vector2(h * moveSpeed * moveSpeedMod * (rollSpeedMod ?? 1), myBody.velocity.y);
         }
         // Check if the player's facing direction needs to be flipped
         if (h != 0 && Mathf.Sign(h) != transform.localScale.x)
@@ -51,12 +56,19 @@ public class PlayerMove : MonoBehaviour {
     public void RollEvade()
     {
         ModifyStature(Stature.rolling);
-        myBody.AddForce(Vector2.right * transform.localScale.x * rollForce, ForceMode2D.Impulse);
-        StartCoroutine(RollStandDelay());
+        StartCoroutine(IRoll());
     }
-    IEnumerator RollStandDelay()
+    IEnumerator IRoll()
     {
-        yield return new WaitForSeconds(1);
+        var frames = 0;
+        while (frames < rollFrames)
+        {
+            frames++;
+            // Needs to be based on 1, as it is a multiplier.
+            rollSpeedMod = 1 + ( rollSpeedModConst - rollSpeedModConst * frames / rollFrames );
+            yield return frameWait;
+        }
+        rollSpeedMod = null;
         StandUp();
     }
     public void StandUp()
