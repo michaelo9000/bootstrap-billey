@@ -4,18 +4,13 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour {
     PlayerReferences Reference;
-    public float moveSpeed;
-    public int rollFrames;
-    public float rollSpeedModConst;
-    float? rollSpeedMod;
-    public int jumpForce;
-    public static bool grounded;
     public enum Stature { standing, ducked, rolling, dropped }
     public Stature stature = Stature.standing;
     private void Start()
     {
-        Reference = gameObject.GetComponent<PlayerReferences>();
+        Reference = GetComponent<PlayerReferences>();
     }
+    public float moveSpeed;
     public void Move(float h)
     {
         // If the player is rolling, set 'h' to its max value
@@ -31,6 +26,9 @@ public class PlayerMove : MonoBehaviour {
         if (h != 0 && Mathf.Sign(h) != transform.localScale.x)
             transform.localScale = new Vector3(Mathf.Sign(h), 1, 1);
     }    
+    public int rollFrames;
+    public float rollSpeedModConst;
+    float? rollSpeedMod;
     public void DuckEvade()
     {
         ModifyStature(Stature.ducked);
@@ -97,20 +95,13 @@ public class PlayerMove : MonoBehaviour {
         Reference._SpriteRenderer.color = color;
         Reference._CapsuleCollider2D.size = newSize;
     }
+
+    public int jumpForce;
+    public bool grounded;
     public void Jump()
     {
         if (!grounded)
             return;
         Reference._Rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-            grounded = true;
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-            grounded = false;
     }
 }

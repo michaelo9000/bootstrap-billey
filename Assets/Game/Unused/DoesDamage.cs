@@ -12,7 +12,7 @@ public class DoesDamage : MonoBehaviour{
         public CollisionObject(GameObject obj)
         {
             gameObject = obj;
-            damageable = obj.GetComponent<SentientBeing>();
+            damageable = obj.GetComponent<HealthAndDamage>();
         }
     }    
     private List<CollisionObject> currentCollisions = new List<CollisionObject>();
@@ -44,7 +44,7 @@ public class DoesDamage : MonoBehaviour{
             var guy = currentCollisions[i];
             if (guy.damageable)
             {
-                var killed = guy.gameObject.GetComponent<SentientBeing>().TakeDamage(damageAmount, gameObject);
+                var killed = guy.gameObject.GetComponent<HealthAndDamage>().TakeDamage(damageAmount, gameObject);
                 if (killed)
                 {
                     killedGuys.Add(killed);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SentientBeing : MonoBehaviour {
+public class HealthAndDamage : MonoBehaviour {
     
     public float health;
     float minHealth;
@@ -69,7 +69,7 @@ public class SentientBeing : MonoBehaviour {
         for (int i = 0; i < MyEnemies.Count; i++)
         {            
             if (MyEnemies[i].isColliding){
-                var didKill = MyEnemies[i].gameObject.GetComponent<SentientBeing>().TakeDamage(damageAmount, gameObject);
+                var didKill = MyEnemies[i].gameObject.GetComponent<HealthAndDamage>().TakeDamage(damageAmount, gameObject);
                 if (didKill)
                 {
                     healthToRestore += RemoveHealthHeld(MyEnemies[i].gameObject);
@@ -124,7 +124,7 @@ public class SentientBeing : MonoBehaviour {
         {
             MyEnemies[i].isColliding = true;
         }         
-        else if (obj.GetComponent<SentientBeing>())
+        else if (obj.GetComponent<HealthAndDamage>())
         {
             MyEnemies.Add(new MyEnemy(obj, 0, true));
         }

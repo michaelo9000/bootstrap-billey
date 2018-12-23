@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour {
     
+    PlayerReferences Reference;
     public static bool windingUp;
     public static bool attacking;
     public GameObject attackBox;
     public float attackDelayFrames;
     public float attackFrames;
     public float attackStamina;
-    WaitForEndOfFrame waitFrame = new WaitForEndOfFrame();
     
+    private void Start()
+    {
+        Reference = GetComponent<PlayerReferences>();
+    }
     public void DoAttack()
     {
-        if(gameObject.GetComponent<SentientBeing>().TestStaminaAction(attackStamina))
+        if(Reference._HealthAndDamage.TestStaminaAction(attackStamina))
             StartCoroutine(IAttack());
     }
 
@@ -24,12 +28,12 @@ public class PlayerAttack : MonoBehaviour {
         int frameCount = 0;
         while (windingUp)
         {
-            yield return waitFrame;
+            yield return Reference.FrameWait;
             if (frameCount > attackDelayFrames)
                 windingUp = false;
             frameCount++;
         }
-        gameObject.GetComponent<SentientBeing>().DoStaminaAction(attackStamina);
+        Reference._HealthAndDamage.DoStaminaAction(attackStamina);
         attacking = true; 
         var atk = Instantiate(attackBox, transform);
         yield return new WaitForSeconds(attackFrames / 60);

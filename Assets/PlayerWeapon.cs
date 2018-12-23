@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerWeapon : MonoBehaviour{
 
-    SentientBeing player;
+    HealthAndDamage player;
     void Start()
     {
-        player = transform.root.gameObject.GetComponent<SentientBeing>();
+        player = transform.root.gameObject.GetComponent<HealthAndDamage>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageSquare : SentientBeing{
+public class DamageSquare : HealthAndDamage{
 
     public SpriteRenderer sprite;
     public Color idleColor;
@@ -12,7 +12,7 @@ public class DamageSquare : SentientBeing{
     {
         AddOrUpdateCollision(collision.gameObject);
         sprite.color = activeColor;
-        if(collision.GetComponent<SentientBeing>())
+        if(collision.GetComponent<HealthAndDamage>())
         {
             DamageCollisions(5);
         }
