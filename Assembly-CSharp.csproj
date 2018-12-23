@@ -67,6 +67,7 @@
      <Compile Include="Assets\Player\Scripts\PlayerAttack.cs" />
      <Compile Include="Assets\Player\Scripts\PlayerControls.cs" />
      <Compile Include="Assets\Player\Scripts\PlayerMove.cs" />
+     <Compile Include="Assets\Player\Scripts\PlayerReferences.cs" />
      <Compile Include="Assets\PlayerWeapon.cs" />
      <Compile Include="Assets\SentientBeing.cs" />
  <Reference Include="UnityEngine.UI">

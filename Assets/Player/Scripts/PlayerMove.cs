@@ -3,32 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour {
-    public enum Stature
-    {
-        standing,
-        ducked,
-        rolling,
-        dropped
-    }
-    public Rigidbody2D myBody;
-    public CapsuleCollider2D myCollider;
-    Vector2 myColliderStartSize;
-    public SpriteRenderer mySprite;
-    Vector2 mySpriteStartSize;
-    SentientBeing _SentientBeing;
+    PlayerReferences Reference;
     public float moveSpeed;
-    public int jumpForce;
+    public int rollFrames;
     public float rollSpeedModConst;
     float? rollSpeedMod;
-    public int rollFrames;
+    public int jumpForce;
     public static bool grounded;
+    public enum Stature { standing, ducked, rolling, dropped }
     public Stature stature = Stature.standing;
-    WaitForEndOfFrame frameWait = new WaitForEndOfFrame();
     private void Start()
     {
-        _SentientBeing = gameObject.GetComponent<SentientBeing>();
-        myColliderStartSize = myCollider.size;
-        mySpriteStartSize = mySprite.size;
+        Reference = gameObject.GetComponent<PlayerReferences>();
     }
     public void Move(float h)
     {
@@ -39,7 +25,7 @@ public class PlayerMove : MonoBehaviour {
         if(h != 0)
         {
             var moveSpeedMod = stature == Stature.ducked || stature == Stature.dropped ? .2f : 1;
-            myBody.velocity = new Vector2(h * moveSpeed * moveSpeedMod * (rollSpeedMod ?? 1), myBody.velocity.y);
+            Reference._Rigidbody2D.velocity = new Vector2(h * moveSpeed * moveSpeedMod * (rollSpeedMod ?? 1), Reference._Rigidbody2D.velocity.y);
         }
         // Check if the player's facing direction needs to be flipped
         if (h != 0 && Mathf.Sign(h) != transform.localScale.x)
@@ -66,7 +52,7 @@ public class PlayerMove : MonoBehaviour {
             frames++;
             // Needs to be based on 1, as it is a multiplier.
             rollSpeedMod = 1 + ( rollSpeedModConst - rollSpeedModConst * frames / rollFrames );
-            yield return frameWait;
+            yield return Reference.FrameWait;
         }
         rollSpeedMod = null;
         StandUp();
@@ -103,15 +89,19 @@ public class PlayerMove : MonoBehaviour {
                 color = Color.white;
                 break;
         }
-        myCollider.size = new Vector2(myCollider.size.x, myColliderStartSize.y/sizeModY);
-        myCollider.offset = new Vector2(myCollider.offset.x, -(myColliderStartSize.y - (myCollider.size.y < myCollider.size.x? myCollider.size.x:myCollider.size.y))/2);
-        mySprite.color = color;
+        var newSize = new Vector2(Reference._CapsuleCollider2D.size.x, Reference.ColliderStartSize.y/sizeModY);
+        Reference._CapsuleCollider2D.offset = new Vector2 (
+            Reference._CapsuleCollider2D.offset.x, 
+            -(Reference.ColliderStartSize.y - (newSize.y < newSize.x? newSize.x:newSize.y))/2
+        );
+        Reference._SpriteRenderer.color = color;
+        Reference._CapsuleCollider2D.size = newSize;
     }
     public void Jump()
     {
         if (!grounded)
             return;
-        myBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        Reference._Rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -124,23 +114,3 @@ public class PlayerMove : MonoBehaviour {
             grounded = false;
     }
 }
-
-
-// public void Roll(bool _rolling)
-// {
-//     rolling = _rolling;
-//     if (rolling)
-//         StartCoroutine(IRoll());
-// }
-
-// IEnumerator IRoll()
-// {
-//     while (rolling)
-//     {
-//         if (_SentientBeing.TestStaminaAction(1))
-//             _SentientBeing.DoStaminaAction(1);
-//         else
-//             rolling = false;
-//         yield return waitFrame;
-//     }
-// }
