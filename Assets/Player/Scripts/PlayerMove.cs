@@ -40,6 +40,8 @@ public class PlayerMove : MonoBehaviour {
     // Todo this should abort if it gets called while the player is already rolling
     public void RollEvade()
     {
+        if(stature == Stature.rolling)
+            return;
         ModifyStature(Stature.rolling);
         StartCoroutine(IRoll());
     }
@@ -49,12 +51,15 @@ public class PlayerMove : MonoBehaviour {
         while (frames < rollFrames)
         {
             frames++;
-            // Needs to be based on 1, as it is a multiplier.
+            // Has to be based on 1, as it is a multiplier.
             rollSpeedMod = 1 + ( rollSpeedModConst - rollSpeedModConst * frames / rollFrames );
             yield return References.FrameWait;
         }
         rollSpeedMod = null;
-        StandUp();
+        if (Input.GetButton("Evade"))
+            ModifyStature(Stature.ducked);
+        else if (stature != Stature.dropped)
+            ModifyStature(Stature.standing);
     }
     public void StandUp()
     {
@@ -101,7 +106,7 @@ public class PlayerMove : MonoBehaviour {
     public bool grounded;
     public void Jump()
     {
-        if (!grounded)
+        if (!References._CollisionKeeper.CanJump())
             return;
         References._Rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }

@@ -24,9 +24,12 @@ public class PlayerControls : MonoBehaviour {
 
         if (Input.GetButtonDown("Evade"))
         {
-            if (References._PlayerMove.stature == PlayerMove.Stature.standing)
-                References._PlayerMove.DuckEvade();
-            EvadeCoroutine = StartCoroutine(CheckEvadeInput());
+            if(References._PlayerMove.stature != PlayerMove.Stature.rolling)
+            {
+                if (References._PlayerMove.stature == PlayerMove.Stature.standing)
+                    References._PlayerMove.DuckEvade();
+                EvadeCoroutine = StartCoroutine(CheckEvadeInput());
+            }
         }
 
         if(Input.GetButton("Evade"))
@@ -40,14 +43,14 @@ public class PlayerControls : MonoBehaviour {
         if (Input.GetButtonUp("Evade"))
         {
             StopCoroutine(EvadeCoroutine);
-            if (evadeHeldFrames < buttonTapFrames)
+            if (evadeHeldFrames >= 0 && evadeHeldFrames < buttonTapFrames)
             {
                 if (References._PlayerMove.stature == PlayerMove.Stature.dropped)
                     References._PlayerMove.StandUp();
                 else
                     References._PlayerMove.DropEvade();
             }
-            else if (evadeHeldFrames < buttonHoldFrames)
+            else if (evadeHeldFrames >= buttonTapFrames && evadeHeldFrames < buttonHoldFrames)
             {
                 References._PlayerMove.RollEvade();
             }
