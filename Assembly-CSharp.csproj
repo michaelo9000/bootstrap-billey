@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CollisionKeeper.cs" />
      <Compile Include="Assets\DamageSquare.cs" />
      <Compile Include="Assets\Enemies\SpawnEnemies.cs" />
      <Compile Include="Assets\Enemies\Standard\EnemyControl.cs" />
@@ -69,7 +70,8 @@
      <Compile Include="Assets\Player\Scripts\PlayerControls.cs" />
      <Compile Include="Assets\Player\Scripts\PlayerMove.cs" />
      <Compile Include="Assets\Player\Scripts\PlayerReferences.cs" />
-     <Compile Include="Assets\PlayerWeapon.cs" />
+     <Compile Include="Assets\Player\Scripts\PlayerWeapon.cs" />
+     <Compile Include="Assets\SentientReferences.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

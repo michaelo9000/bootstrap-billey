@@ -2,25 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageSquare : HealthAndDamage{
+public class DamageSquare : MonoBehaviour{
 
-    public SpriteRenderer sprite;
+    SentientReferences References;
     public Color idleColor;
     public Color activeColor;
-    
+
+    private void Start()
+    {
+        References = GetComponent<SentientReferences>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        AddOrUpdateCollision(collision.gameObject);
-        sprite.color = activeColor;
-        if(collision.GetComponent<HealthAndDamage>())
-        {
-            DamageCollisions(5);
-        }
+        References._SpriteRenderer.color = activeColor;
+        var healthToRestore = References._CollisionKeeper.DamageAllEnemyCollisions(5);
+        References._HealthAndDamage.UpdateHealthAndStamina(healthToRestore, 0);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        RemoveCollision(collision.gameObject);
-        sprite.color = idleColor;
+        References._SpriteRenderer.color = idleColor;
     }
 }
