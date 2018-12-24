@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour {
     
-    PlayerReferences Reference;
+    PlayerReferences References;
     public static bool windingUp;
     public static bool attacking;
     public GameObject attackBox;
@@ -14,11 +14,11 @@ public class PlayerAttack : MonoBehaviour {
     
     private void Start()
     {
-        Reference = GetComponent<PlayerReferences>();
+        References = GetComponent<PlayerReferences>();
     }
     public void DoAttack()
     {
-        if(Reference._HealthAndDamage.TestStaminaAction(attackStamina))
+        if(References._HealthAndDamage.TestStaminaAction(attackStamina))
             StartCoroutine(IAttack());
     }
 
@@ -28,12 +28,12 @@ public class PlayerAttack : MonoBehaviour {
         int frameCount = 0;
         while (windingUp)
         {
-            yield return Reference.FrameWait;
+            yield return References.FrameWait;
             if (frameCount > attackDelayFrames)
                 windingUp = false;
             frameCount++;
         }
-        Reference._HealthAndDamage.DoStaminaAction(attackStamina);
+        References._HealthAndDamage.DoStaminaAction(attackStamina);
         attacking = true; 
         var atk = Instantiate(attackBox, transform);
         yield return new WaitForSeconds(attackFrames / 60);

@@ -4,27 +4,28 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour {
 
-    PlayerReferences Reference;
+    PlayerReferences References;
     public int buttonTapFrames;
     public int buttonHoldFrames;
     Coroutine EvadeCoroutine;
     public int evadeHeldFrames = 0;
     public SpriteRenderer rollIndicator;
 
-    void Start () {
-        Reference = GetComponent<PlayerReferences>();
+    void Start () 
+    {
+        References = GetComponent<PlayerReferences>();
 	}
 	void Update () 
     {
-        Reference._PlayerMove.Move(Input.GetAxis("Horizontal"));
+        References._PlayerMove.Move(Input.GetAxis("Horizontal"));
 
         if (Input.GetButtonDown("Jump"))
-            Reference._PlayerMove.Jump();
+            References._PlayerMove.Jump();
 
         if (Input.GetButtonDown("Evade"))
         {
-            if (Reference._PlayerMove.stature == PlayerMove.Stature.standing)
-                Reference._PlayerMove.DuckEvade();
+            if (References._PlayerMove.stature == PlayerMove.Stature.standing)
+                References._PlayerMove.DuckEvade();
             EvadeCoroutine = StartCoroutine(CheckEvadeInput());
         }
 
@@ -41,23 +42,23 @@ public class PlayerControls : MonoBehaviour {
             StopCoroutine(EvadeCoroutine);
             if (evadeHeldFrames < buttonTapFrames)
             {
-                if (Reference._PlayerMove.stature == PlayerMove.Stature.dropped)
-                    Reference._PlayerMove.StandUp();
+                if (References._PlayerMove.stature == PlayerMove.Stature.dropped)
+                    References._PlayerMove.StandUp();
                 else
-                    Reference._PlayerMove.DropEvade();
+                    References._PlayerMove.DropEvade();
             }
             else if (evadeHeldFrames < buttonHoldFrames)
             {
-                Reference._PlayerMove.RollEvade();
+                References._PlayerMove.RollEvade();
             }
             else 
-                Reference._PlayerMove.StandUp();
+                References._PlayerMove.StandUp();
             evadeHeldFrames = 0;
             rollIndicator.color = Color.white;
         }
 
         if (Input.GetButtonDown("Attack"))
-            Reference._PlayerAttack.DoAttack();
+            References._PlayerAttack.DoAttack();
     }
     // TODO make generic, for other button hold checking
     /// <summary>
@@ -68,7 +69,7 @@ public class PlayerControls : MonoBehaviour {
     {
         while (true)
         {
-            yield return Reference.FrameWait;
+            yield return References.FrameWait;
             evadeHeldFrames++;
         }
     }

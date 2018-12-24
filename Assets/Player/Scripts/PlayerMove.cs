@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour {
-    PlayerReferences Reference;
+    PlayerReferences References;
     public enum Stature { standing, ducked, rolling, dropped }
     public Stature stature = Stature.standing;
     private void Start()
     {
-        Reference = GetComponent<PlayerReferences>();
+        References = GetComponent<PlayerReferences>();
     }
     public float moveSpeed;
     public void Move(float h)
@@ -20,7 +20,7 @@ public class PlayerMove : MonoBehaviour {
         if(h != 0)
         {
             var moveSpeedMod = stature == Stature.ducked || stature == Stature.dropped ? .2f : 1;
-            Reference._Rigidbody2D.velocity = new Vector2(h * moveSpeed * moveSpeedMod * (rollSpeedMod ?? 1), Reference._Rigidbody2D.velocity.y);
+            References._Rigidbody2D.velocity = new Vector2(h * moveSpeed * moveSpeedMod * (rollSpeedMod ?? 1), References._Rigidbody2D.velocity.y);
         }
         // Check if the player's facing direction needs to be flipped
         if (h != 0 && Mathf.Sign(h) != transform.localScale.x)
@@ -50,7 +50,7 @@ public class PlayerMove : MonoBehaviour {
             frames++;
             // Needs to be based on 1, as it is a multiplier.
             rollSpeedMod = 1 + ( rollSpeedModConst - rollSpeedModConst * frames / rollFrames );
-            yield return Reference.FrameWait;
+            yield return References.FrameWait;
         }
         rollSpeedMod = null;
         StandUp();
@@ -87,13 +87,13 @@ public class PlayerMove : MonoBehaviour {
                 color = Color.white;
                 break;
         }
-        var newSize = new Vector2(Reference._CapsuleCollider2D.size.x, Reference.ColliderStartSize.y/sizeModY);
-        Reference._CapsuleCollider2D.offset = new Vector2 (
-            Reference._CapsuleCollider2D.offset.x, 
-            -(Reference.ColliderStartSize.y - (newSize.y < newSize.x? newSize.x:newSize.y))/2
+        var newSize = new Vector2(References._CapsuleCollider2D.size.x, References.ColliderStartSize.y/sizeModY);
+        References._CapsuleCollider2D.offset = new Vector2 (
+            References._CapsuleCollider2D.offset.x, 
+            -(References.ColliderStartSize.y - (newSize.y < newSize.x? newSize.x:newSize.y))/2
         );
-        Reference._SpriteRenderer.color = color;
-        Reference._CapsuleCollider2D.size = newSize;
+        References._SpriteRenderer.color = color;
+        References._CapsuleCollider2D.size = newSize;
     }
 
     public int jumpForce;
@@ -102,6 +102,6 @@ public class PlayerMove : MonoBehaviour {
     {
         if (!grounded)
             return;
-        Reference._Rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        References._Rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 }
