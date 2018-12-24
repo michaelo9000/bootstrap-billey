@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerWeapon : MonoBehaviour{
 
+    // Need a better way todo this, so that the weapon accesses the player's References script
     PlayerReferences References;
     void Start()
     {
