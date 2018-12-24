@@ -7,10 +7,8 @@ class SentientReferences : MonoBehaviour {
 	public HealthAndDamage _HealthAndDamage;
     public CollisionKeeper _CollisionKeeper;
     public Rigidbody2D _Rigidbody2D;
-    public CapsuleCollider2D _CapsuleCollider2D;
-    public Vector2 ColliderStartSize;
+    public Collider2D _Collider2D;
     public SpriteRenderer _SpriteRenderer;
-    public Vector2 SpriteStartSize;
     public WaitForEndOfFrame FrameWait = new WaitForEndOfFrame();
 	void Start () {
         // If the component has not been set in the editor (i.e. it is null), find it on the gameObject.
@@ -19,10 +17,7 @@ class SentientReferences : MonoBehaviour {
         _CollisionKeeper = _CollisionKeeper ?? GetComponent<CollisionKeeper>();
         // Doesn't work for these for some reason?
         _Rigidbody2D = _Rigidbody2D ?? GetComponent<Rigidbody2D>();
-        _CapsuleCollider2D = _CapsuleCollider2D ?? GetComponent<CapsuleCollider2D>();
+        _Collider2D = _Collider2D ?? GetComponent<CapsuleCollider2D>();
         _SpriteRenderer = _SpriteRenderer ?? GetComponent<SpriteRenderer>();
-
-        ColliderStartSize = _CapsuleCollider2D.size;
-        SpriteStartSize = _SpriteRenderer.size;
 	}
 }

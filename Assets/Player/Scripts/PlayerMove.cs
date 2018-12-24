@@ -37,6 +37,7 @@ public class PlayerMove : MonoBehaviour {
     {
         ModifyStature(Stature.dropped);
     }
+    // Todo this should abort if it gets called while the player is already rolling
     public void RollEvade()
     {
         ModifyStature(Stature.rolling);
@@ -87,13 +88,13 @@ public class PlayerMove : MonoBehaviour {
                 color = Color.white;
                 break;
         }
-        var newSize = new Vector2(References._CapsuleCollider2D.size.x, References.ColliderStartSize.y/sizeModY);
-        References._CapsuleCollider2D.offset = new Vector2 (
-            References._CapsuleCollider2D.offset.x, 
-            -(References.ColliderStartSize.y - (newSize.y < newSize.x? newSize.x:newSize.y))/2
-        );
+        // var newSize = new Vector2(References._Collider2D.size.x, References.ColliderStartSize.y/sizeModY);
+        // References._Collider2D.offset = new Vector2 (
+        //     References._Collider2D.offset.x, 
+        //     -(References.ColliderStartSize.y - (newSize.y < newSize.x? newSize.x:newSize.y))/2
+        // );
+        // References._Collider2D.size = newSize;
         References._SpriteRenderer.color = color;
-        References._CapsuleCollider2D.size = newSize;
     }
 
     public int jumpForce;
