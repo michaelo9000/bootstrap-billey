@@ -7,22 +7,22 @@ public class CollisionKeeper : MonoBehaviour {
 
     private class Collision
     {
-        // TODO keeping gameobjects not the best maybe? IDs?
-		// Nah need the object to access the health methods.
         public GameObject gameObject { get; set; }
         public bool isColliding { get; set; }
         public bool isEnemy { get; set; }
+        public bool isPlatform { get; set; }
         public float healthHeld { get; set; }
-        public Collision(GameObject obj, bool _isEnemy)
+        public Collision(GameObject obj, bool _isEnemy, bool _isPlatform)
         {
             gameObject = obj;
             isColliding = true;
 			isEnemy = _isEnemy;
+			isPlatform = _isPlatform;
             healthHeld = 0;
         }
     }
     private List<Collision> Collisions = new List<Collision>();
-    int IndexOfCollision(GameObject obj)
+    private int IndexOfCollision(GameObject obj)
     {
         for (int i = 0; i < Collisions.Count; i++)
         {
@@ -43,7 +43,7 @@ public class CollisionKeeper : MonoBehaviour {
         }         
         else
         {
-            Collisions.Add(new Collision(obj, obj.GetComponent<HealthAndDamage>() != null));
+            Collisions.Add(new Collision(obj, obj.GetComponent<HealthAndDamage>() != null, true));
         }
     }
     private void OnTriggerExit2D(Collider2D collision)    
@@ -66,7 +66,7 @@ public class CollisionKeeper : MonoBehaviour {
         {
 			// Surely this wouldn't happen if OnTriggerEnter occurs first? (which it should)
 			Debug.Log("UNEXPECTED: New collision created for " + obj.name + " in UpdateHealthHeld");
-            Collisions.Add(new Collision(obj, true));
+            Collisions.Add(new Collision(obj, true, true));
         }
     }
     public float RemoveHealthHeld(GameObject obj)
@@ -96,4 +96,13 @@ public class CollisionKeeper : MonoBehaviour {
         }
 		return healthToRestore;
 	}
+    public bool CanJump()
+    {
+        for(int i = 0; i < Collisions.Count; i++)
+        {
+            if(Collisions[i].isPlatform && Collisions[i].isColliding)
+                return true;
+        }
+        return false;
+    }
 }
