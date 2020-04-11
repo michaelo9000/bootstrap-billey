@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControls : MonoBehaviour {
+public class PlayerControl : MonoBehaviour {
 
     PlayerReferences References;
     public int buttonTapFrames;
@@ -24,7 +24,7 @@ public class PlayerControls : MonoBehaviour {
 
         if (Input.GetButtonDown("Evade"))
         {
-            if(References._PlayerMove.stature != PlayerMove.Stature.rolling)
+            if (true)//References._PlayerMove.stature != PlayerMove.Stature.rolling)
             {
                 if (References._PlayerMove.stature == PlayerMove.Stature.standing)
                     References._PlayerMove.DuckEvade();
@@ -34,7 +34,7 @@ public class PlayerControls : MonoBehaviour {
 
         if(Input.GetButton("Evade"))
         {
-            if(evadeHeldFrames > buttonTapFrames && evadeHeldFrames < buttonHoldFrames)
+            if (evadeHeldFrames > buttonTapFrames && evadeHeldFrames < buttonHoldFrames)
                 rollIndicator.color = Color.cyan;
             else 
                 rollIndicator.color = Color.white;
@@ -45,6 +45,7 @@ public class PlayerControls : MonoBehaviour {
             StopCoroutine(EvadeCoroutine);
             if (evadeHeldFrames >= 0 && evadeHeldFrames < buttonTapFrames)
             {
+                Debug.Log("evade held for " + evadeHeldFrames + " frames");
                 if (References._PlayerMove.stature == PlayerMove.Stature.dropped)
                     References._PlayerMove.StandUp();
                 else

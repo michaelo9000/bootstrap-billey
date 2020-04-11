@@ -1,11 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class CollisionKeeper : MonoBehaviour {
 
-    private class Collision
+    // Perfectly acceptable for this to be null - that just means that this game object does not do damage.
+    DoesDamage _DoesDamage;
+
+    public class Collision
     {
         public GameObject gameObject { get; set; }
         public bool isColliding { get; set; }
@@ -21,8 +25,15 @@ public class CollisionKeeper : MonoBehaviour {
             healthHeld = 0;
         }
     }
+
+    private void Start()
+    {
+        _DoesDamage = GetComponent<DoesDamage>();
+    }
+
     private List<Collision> Collisions = new List<Collision>();
-    private int IndexOfCollision(GameObject obj)
+
+    private int GetIndexOfCollision(GameObject obj)
     {
         for (int i = 0; i < Collisions.Count; i++)
         {
@@ -33,69 +44,60 @@ public class CollisionKeeper : MonoBehaviour {
         }
         return -1;
     }
+
+    public Collision GetCollisionWithGameObject(GameObject obj)
+    {
+        for (int i = 0; i < Collisions.Count; i++)
+        {
+            if (Collisions[i].gameObject == obj)
+            {
+                return Collisions[i];
+            }
+        }
+        return null;
+    }
+
+    public Collision GetCollisionWithIndex(int index)
+    {
+        return Collisions[index];
+    }
+
+    public void UpdateCollisionWithGameObject(GameObject obj, Collision updatedCollision)
+    {
+        var index = GetIndexOfCollision(obj);
+        Collisions[index] = updatedCollision;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-		var obj = collision.gameObject;
-        var i = IndexOfCollision(obj);
-        if(i > -1)
+        Collision storedCollision;
+
+        var obj = collision.gameObject;
+        var index = GetIndexOfCollision(obj);
+
+        if (index > -1)
         {
-            Collisions[i].isColliding = true;
-        }         
+            storedCollision = Collisions[index];
+            Collisions[index].isColliding = true;
+        }
         else
         {
-            Collisions.Add(new Collision(obj, obj.GetComponent<HealthAndDamage>() != null, true));
+            storedCollision = new Collision(obj, obj.GetComponent<HealthAndDamage>() != null, true);
+            Collisions.Add(storedCollision);
         }
+        if (_DoesDamage != null)
+            _DoesDamage.DamageCollision(storedCollision);
     }
+
     private void OnTriggerExit2D(Collider2D collision)    
     {
-        var i = IndexOfCollision(collision.gameObject);
+        var i = GetIndexOfCollision(collision.gameObject);
         if(i > -1)
         {
             Collisions[i].isColliding = false;
         }
     }
-    public void UpdateHealthHeld(GameObject obj, float damage)
-    {
-        var i = IndexOfCollision(obj);
-        if(i > -1)
-        {
-            Collisions[i].healthHeld += damage;
-            Debug.Log(this.gameObject.name + " says "+obj.name+" has "+Collisions[i].healthHeld + " of my HP!");
-        }
-        else 
-        {
-			// Surely this wouldn't happen if OnTriggerEnter occurs first? (which it should)
-			Debug.Log("UNEXPECTED: New collision created for " + obj.name + " in UpdateHealthHeld");
-            Collisions.Add(new Collision(obj, true, true));
-        }
-    }
-    public float RemoveHealthHeld(GameObject obj)
-    {
-        var i = IndexOfCollision(obj);
-        if(i > -1)
-        {
-            var healthReturned = Collisions[i].healthHeld;
-            Collisions[i].healthHeld = 0;
-            return healthReturned;
-        }
-        return 0;
-    }
-	public float DamageAllEnemyCollisions(float damage)
-	{
-		float healthToRestore = 0;
-		var enemies = Collisions.Where(c => c.isEnemy == true).Select(c => c).ToArray();
-        for (int i = 0; i < enemies.Length; i++)
-        {            
-            if (enemies[i].isColliding){
-                var didKill = enemies[i].gameObject.GetComponent<HealthAndDamage>().TakeDamage(damage, gameObject);
-                if (didKill)
-                {
-                    healthToRestore += RemoveHealthHeld(enemies[i].gameObject);
-                }
-            }
-        }
-		return healthToRestore;
-	}
+
     public bool CanJump()
     {
         for(int i = 0; i < Collisions.Count; i++)

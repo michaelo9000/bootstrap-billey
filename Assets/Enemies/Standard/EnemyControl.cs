@@ -4,43 +4,41 @@ using UnityEngine;
 
 public class EnemyControl : MonoBehaviour {
 
-    public Animator anim;
-    public new SpriteRenderer renderer;
-    Transform player;
+    EnemyReferences References;
     public bool movingToPlayer;
     public float framesBetweenPositionChecks;
     public float noticePlayerProximity;
-    public float movementLerp;
-    Rigidbody2D myBody;
+    public float jumpToPlayerDistance;
 
-    void Start () {
-        myBody = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+    void Start () 
+    {
+        References = GetComponent<EnemyReferences>();
         RepeatingEvents.RegisterMethod(this, "CheckDistanceToPlayer", 30, 0);
     }
     
     void FixedUpdate ()
     {
         if (movingToPlayer)
-        {   
-            //get difference between me and player
-            var newPos = new Vector2(
-                player.position.x - myBody.position.x,
-                player.position.y - myBody.position.y
-            );
-            myBody.MovePosition(myBody.position + newPos * Time.deltaTime * movementLerp);
-            renderer.flipX = myBody.position.x - player.position.x > 0;
+        {
+            var playerIsInFront = References._Rigidbody2D.position.x < References._Global._Player.position.x;
+            References._EnemyMove.Move(playerIsInFront ? 1 : -1);
+            // Add another check for player vertical velocity, to determine whether the player is at the start of a jump that will take them outside the jumpToPlayerDistance
+            var playerIsHighUp = References._Global._Player.position.y - References._Rigidbody2D.position.y > jumpToPlayerDistance;
+            if (playerIsHighUp)
+                References._EnemyMove.Jump();
+            if (Time.frameCount % 100 == 0)
+                References._EnemyAttack.DoAttack();
         }
 	}
 
     void CheckDistanceToPlayer()
     {
-        var grad = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y);
+        var grad = new Vector2(References._Global._Player.position.x - transform.position.x, References._Global._Player.position.y - transform.position.y);
         var dist = Mathf.Sqrt(grad.x * grad.x + grad.y * grad.y);
         if (dist < noticePlayerProximity)
             movingToPlayer = true;
         else
             movingToPlayer = false;
-        anim.SetBool("follow", movingToPlayer);
+        //anim.SetBool("follow", movingToPlayer);
     }
 }

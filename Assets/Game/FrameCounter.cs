@@ -10,6 +10,7 @@ public class FrameCounter : MonoBehaviour {
 
     private IEnumerator Start()
     {
+        Application.targetFrameRate = 60;
         while (true)
         {
             totalFramesOneSecondAgo = Time.frameCount;

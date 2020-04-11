@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour {
+public class EnemyAttack : MonoBehaviour {
     
-    PlayerReferences References;
+    EnemyReferences References;
     public static bool windingUp;
     public static bool attacking;
     public GameObject attackBox;
@@ -14,11 +14,11 @@ public class PlayerAttack : MonoBehaviour {
     
     private void Start()
     {
-        References = GetComponent<PlayerReferences>();
+        References = GetComponent<EnemyReferences>();
     }
     public void DoAttack()
     {
-        if(References._HealthAndDamage.TestStaminaAction(attackStamina))
+        if (References._HealthAndDamage.TestStaminaAction(attackStamina))
             StartCoroutine(IAttack());
     }
 
@@ -35,10 +35,8 @@ public class PlayerAttack : MonoBehaviour {
         }
         References._HealthAndDamage.DoStaminaAction(attackStamina);
         attacking = true; 
-
         var attackObject = Instantiate(attackBox, References._Surrogate.transform);
         attackObject.GetComponent<DoesDamage>().Owner = gameObject;
-
         yield return new WaitForSeconds(attackFrames / 60);
         attacking = false;
         Destroy(attackObject);

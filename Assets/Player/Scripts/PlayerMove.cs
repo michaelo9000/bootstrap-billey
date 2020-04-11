@@ -2,15 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour {
+public class PlayerMove : MonoBehaviour 
+{
     PlayerReferences References;
+
+    public float moveSpeed;
+
     public enum Stature { standing, ducked, rolling, dropped }
     public Stature stature = Stature.standing;
+
+    public int rollFrames;
+    public float rollSpeedModConst;
+    float? rollSpeedMod;
+
+    public int jumpForce;
+
     private void Start()
     {
         References = GetComponent<PlayerReferences>();
     }
-    public float moveSpeed;
+
     public void Move(float h)
     {
         // If the player is rolling, set 'h' to its max value
@@ -25,23 +36,25 @@ public class PlayerMove : MonoBehaviour {
         // Check if the player's facing direction needs to be flipped
         if (h != 0 && Mathf.Sign(h) != transform.localScale.x)
             transform.localScale = new Vector3(Mathf.Sign(h), 1, 1);
-    }    
-    public int rollFrames;
-    public float rollSpeedModConst;
-    float? rollSpeedMod;
+
+        References._Surrogate.SetPosition();
+    }
+
     public void DuckEvade()
     {
         ModifyStature(Stature.ducked);
     }
+
     public void DropEvade()
     {
         ModifyStature(Stature.dropped);
     }
+
     // Todo this should abort if it gets called while the player is already rolling
     public void RollEvade()
     {
-        if(stature == Stature.rolling)
-            return;
+        //if(stature == Stature.rolling)
+        //    return;
         ModifyStature(Stature.rolling);
         StartCoroutine(IRoll());
     }
@@ -68,46 +81,45 @@ public class PlayerMove : MonoBehaviour {
     void ModifyStature(Stature newStature)
     {
         stature = newStature;
-        float sizeModY;
-        Color color;
+        DisableColliders();
         switch (stature)
         {
             case Stature.dropped:
-                sizeModY = 4;
-                color = Color.red;
+                References._SpriteRenderer.sprite = References.DropSprite;
+                References._SpriteRenderer.color = Color.red;
+                References.DropCollider.enabled = true;
                 break;
             case Stature.ducked:
-                sizeModY = 2;
-                color = Color.yellow;
+                References._SpriteRenderer.sprite = References.DuckSprite;
+                References._SpriteRenderer.color = Color.yellow;
+                References.DuckCollider.enabled = true;
                 break;
             case Stature.rolling:
-                sizeModY = 1.5f;
-                color = Color.cyan;
+                References._SpriteRenderer.sprite = References.RollSprite;
+                References._SpriteRenderer.color = Color.cyan;
+                References.RollCollider.enabled = true;
                 break;
             case Stature.standing:
-                sizeModY = 1;
-                color = Color.white;
-                break;
             default: 
-                sizeModY = 1;
-                color = Color.white;
+                References._SpriteRenderer.sprite = References._Sprite;
+                References._SpriteRenderer.color = Color.white;
+                References._Collider2D.enabled = true;
                 break;
         }
-        // var newSize = new Vector2(References._Collider2D.size.x, References.ColliderStartSize.y/sizeModY);
-        // References._Collider2D.offset = new Vector2 (
-        //     References._Collider2D.offset.x, 
-        //     -(References.ColliderStartSize.y - (newSize.y < newSize.x? newSize.x:newSize.y))/2
-        // );
-        // References._Collider2D.size = newSize;
-        References._SpriteRenderer.color = color;
     }
 
-    public int jumpForce;
-    public bool grounded;
     public void Jump()
     {
         if (!References._CollisionKeeper.CanJump())
             return;
         References._Rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    void DisableColliders()
+    {
+        References._Collider2D.enabled = false;
+        References.DuckCollider.enabled = false;
+        References.DropCollider.enabled = false;
+        References.RollCollider.enabled = false;
     }
 }

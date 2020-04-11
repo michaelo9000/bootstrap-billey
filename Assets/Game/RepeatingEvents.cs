@@ -16,8 +16,8 @@ public class RepeatingEvents : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
-
+    void Update () 
+    {
 		for(int i = 0; i < methods.Count; i++)
         {            
             var m = methods[i];
@@ -39,6 +39,7 @@ public class RepeatingEvents : MonoBehaviour {
     /// <param name="frameDelay">Number of frames to delay from the point of registering</param>
     public static void RegisterMethod(MonoBehaviour script, string name, int frameInterval, int frameDelay)
     {
+        Debug.Log($"Registered new repeating event from {script.name}: {name}");
         methods.Add(new RepeatingMethod() {
             script = script,
             name = name,
