@@ -1,0 +1,128 @@
+0 An Npc has a goatee- another Npc says 'he thinks he looks like (celebrity character) but he doesn't. He just looks bad'
+
+0 Stones which make up a map scattered through the game
+
+0 Main character is a God of some kind who was convinced at birth they are part of the world they live in but really they are being kept there until they reach a vulnerable state of being and can be destroyed. They find this out slowly through the game. Eg they are told about a far away land that is in ruins when really it is thriving and they are not meant to see it because it will give away who they really are. They go there only to find it has been destroyed, but only recently by the people holding them captive. They are clued into going by the fact that they seem more suited to living there, rather than where they grew up.
+
+bad guy talks about himself and how he's longing for a certain type of activity or environment - indicates where he'll be first next cycle.
+
+0 Something that is beyond human conception, when people try to look at/hear it their brain blows a fuse to prevent overloading etc. a chemical or method of some kind is created to prevent the brain doing this. What happens then?
+
+Long ago an extremely powerful deity who had everything realised that the only truly scarce resource was time. He sought to create an object to stop time for himself while leaving the rest of the world unaffected. He succeeded mostly but he was betrayed, and as he had to use a part of his life essence to create it, when it left him he began to wither.
+Beginning the game, an old man sends you on a quest to retrieve the object which you know little about. He is the deity and as soon as he has it he becomes all powerful again and wants to travel far away to accelerate time in the land to when it is evolved; perhaps it is a new land he reigns over and he wants it to escape its infancy and flourish, though this will mean the player and everyone he knows dying.
+
+0 A guy who proclaims himself king of the land. No one anywhere knows what a King is or who he is, and he commands his subjects to enact his policies throughout the land but never goes out to see anything working. His subjects humour him because he's a nice guy, but one says 'it's a good thing he doesn't actually have any power because he'd be a terrible King'.
+
+0 'Fore knowers': now that's a word that's real, for sure. Not this King business.
+
+0 Fore knowers actually have knowledge of previous versions of the universe; the events just happen to play out the same in the persons future
+
+0 The game universe is cyclical. When time reaches its end and the universe collapses, it returns into the Presence, who forms the agonist and the process repeats. With every iteration, the Presence's memory retains aspects of previous universes. Objects, people etc
+
+0 "I don't THINK so" well how can you be so sure "I just said I don't think so how does that sound sure"
+
+0 The agonist leaves behind something very important because the player pocketed it from his basement. He leaves, time moves real fast, then he has to come back. This makes the world and the npcs age
+
+0 A guy with his head stuck in a wall, his body behind it. Much later you come to the other side of the wall an find his body is very thin and he could just crawl through.
+
+0 Randomly generated npcs; names generated first a suffix (family name), then a prefix and con joining syllable.
+Generate sprites by skin, hair, eyes
+
+0 Character who has witzelsucht
+
+0 An artefact that slows time at an increasing rate toward it, where time stops. It's vicinity of effect stretches hundreds of kilometres.
+
+0 Killing enemies restores the amount of damage they did to the player. If the player decides to run they won't get that hp back.
+
+0 Can spare enemies, since they can't attack when below a certain level of HP. There's a guy who will heal them if they have been sparing enemies.
+
+0 The player is pressured by time and must finish the game before some time dependent event occurs. There are sections of the game in which the player is close enough to the time orb that time stops moving so they can take their time, but each time the orb moves the player is pressured to get closer so that time will slow down. The game should be quite short to encourage play of NG+ to discover more things in areas of great time pressure; time should move quickly enough that the player can explore only a fraction of what is available with each play through.
+
+0 The player will be given one teleport stick which can be planted anywhere and be used to travel back to the hub town. More sticks can be collected, though they are rare. They will form a network where travel is possible between any two sticks.
+
+0 The player is also given a watch to tell the time elapsed. It can be improved to show the rate of time passing in other areas on the world map.
+
+0 Weapons are imbued with magic to damage the soul; the flesh is not definite. This means armor is old fashioned and most characters wear normal clothing with magical protection
+
+0 Mema
+
+0 Braille "do not touch"
+
+0 "speak of the devil" oh were you talking about me? "No we were talking about (...). I thought that's what you say when someone walks into the room"
+
+0 Vietnamese train speaker voice; loud distorted stilted very terrifying 
+
+0 False gravestone ; died 29 feb in a non leap year
+
+0 "Very roughly translated it is : properly translated, it is: . That's better I think "
+
+0 Fluffy dog with a talking bird that lives in its back fur
+
+0 Invisible enemy that freezes over at night time and the ice makes them visible. Thaw out and move during the day
+
+0 Council of elders blind and deaf. Write propositions and pass around circle. Continue passing if in agreement. If it reaches the writer it is approved.
+
+0 Told not to pat dog in house. If you do he follows you through the house. Blocks path to an item if he's following
+
+0 Stats increase Fibonacci sequence. At the start an Npc increases then all and says go on take a look, they've all gone up a notch! From 1-1.
+
+0 Only one vendor Npc. Eats the gold you feed. Becomes larger and more weighed down the more you buy. Can die if you buy too much.
+
+0 Haunted house attraction that really is haunted. The ghosts work for the people in exchange for something. Ghost money
+
+0 Young king bases his actions on a biography or something he finds. The biography turns out to be his own from a previous cycle.
+
+0 One Npc tells you how to use a menu item like saving. Another says he must be losing it and saying weird things. And that he didn't even explain saving right.
+
+0 Dad- trying to make beer or something. The first one was too warm, this ones too cold, but I don't mind. If I got it right on my first go, I'd be happy for a minute, but I wouldn't have anything to work on. This way I have more fun.
+
+0 City that is empty if you get there too late. Bodies under a floor
+
+0 Find a note asking for rescue by someone trapped.
+Depending on the proximity of the time crystal they may be dead when you arrive 
+
+0 A very badly written play championed by and starring the person who wrote it so badly who has utter faith and passion for the piece
+
+0 Mistranslation jokes
+
+0 Antagonist is sympathetic. He's been mayor of the home town since the start of time and has seen its residents struggle through life until they die and wants to speed up that process like pulling off a bandaid. He is not serving himself except to avoid watching people live and die all around him. He wants to bring forward the foreseen time when the land is a paradise, and to expand the power of the crystal to have the whole world stop ageing, or maybe age at a consistent pace. Destroying the crystal probably allows time to accelerate everywhere until the world ends. He may be persuaded to think his plan is bad and to stop it.
+
+0 At some point a very prominent and culturally important star explodes (becomes a supernova; takes several months from star hood to maximum brightness after explosion and several years to fade) in the sky. Scientists maintain it is just a ball of gas at the end of its life cycle, religious people think it is of great significance and meaning, and yet the scientists still seem shaken by its significance, believing on some level it means something. The idea is that no one really knows. Chaos ensues
+
+0 An Npc in the home village who has never been outside it. She can't afford to go anywhere. She envies her friends who have been to the capital. She sees travellers and wonders where they are going and thinks it is exciting. She wants to go with you. She asks you to tell her about your travels
+
+0 Hsup puzzle where you have to find a door handle to install. You pry open the door and implement the door handle. You can now open the door
+
+0 A spot the difference which is almost impossible without using the crossed eyes technique
+ 
+0 The story of the pig eating the baby, quite terrifying
+Other pig npcs who are nice say please don't judge us by him, pigs are always portrayed as the villains
+
+0 Lottery. Only 6 balls in the tumbler so the same numbers keep coming up. Player finds out by looking inside after playing, maybe a couple of times. Old man says "I'm on the hottest streak of my life". Mc says prizes are bad cos everyone always wins and they can't afford good ones that often
+
+0 Character next to a door says it needs some number of game items to unlock. Can't open. Someone else says he's tricking: Say that back to yourself. How ridiculous does that sound? The door just opens.
+
+0 Speak to a computer in binary by placing rocks in 5 holes or stepping on 5 buttons
+
+0 Level where totvh makes shadows that shoot you but if you keep walking you pass the object casting the show
+
+0 Asian pink bow man
+
+0 Water level where the water gives the player the power, or takes power from enemy. Sloes them down but on land enemies are fast
+
+0 Town so small it's just one house with 2 families in it. Family so large it's a town.
+
+0 Rainy street in Cambodia level. Dog street, stalls etc. Dogs attacking you, running out of houses.
+
+0 Basic weapon, beating areas gives elemental abilities a la megaman that are useful in other areas. 
+
+0 Unlock stuff by doing challenges, like killing everything in an area, collecting everything in an area, doing puzzles.
+
+0 Objectives in order to progress the story in different map locations. Entire map open from beginning. 
+Go here, get this. With this, learn that you have to go here. Possible to cut out the middleman with luck or prior knowledge. 
+
+0 Don't make map linear, levels sprout off different points. 
+
+0 Hit enemies almost to death and they will all struggle like Sif. Next to harmless. Each hit ups player stats so killing is not at all necessary.
+
+0 Seasons in the game. Summer to winter to summer to end of the universe. Non explicit timer.

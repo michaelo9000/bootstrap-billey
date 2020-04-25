@@ -5,3 +5,4 @@
 !*.cs
 !*.sln
 !*.csproj
+!/*.txt

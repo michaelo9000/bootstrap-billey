@@ -1,0 +1,107 @@
+=====================================================
+FORWARDS AND BACKWARDS BOSS GAME
+=====================================================
+
+tree branch level
+cycle boardwalk level
+industrial pipe level
+
+Walking on cars. Bigger ones push onto road. Big truck boss
+
+formula:
+forward level, secrets etc throughout. exploration.
+chased by monster at the end.
+big puzzle to trap monster, smaller obstacles to kill monster.
+some reason to return through the level.
+alternate pathways only accessible from the end.
+Very few enemies apart from a series of bosses, like shadow of the colossus
+
+puzzles:
+activate a net at the start of the level, activate hole at the end of the level.
+binary input to computer.
+
+Level where the goal is to die asap
+
+plot:
+game starts waking up in ancient cave or something.
+glyphs on the wall telling the story of a hero traversing a land, encountering a monster and returning having achieved something. at the end it is cracked somehow to show the monster either dead or just left alone. cracked piece has fallen on the floor, showing the monster alive.
+
+=====================================================
+RPG GAME
+=====================================================
+
+Turn based battles with no transition to a battle screen.
+
+Bosses must be killed by deducing a weakness, not simply by being strong.
+
+Every boss has a critical weakness, and is designed around this weakness. A new character can beat the hardest boss by properly exploiting its weaknesses.
+
+One party member turns on the player, like Muscles' story.
+
+The player is able to become absurdly powerful throughout the game. New abilities are revealed and each time it should seem like there could not be anything greater, eg the world-the solar system-the galaxy-the universe-even bigger, or like legendary Pokemon as the generations go on.
+
+When battling time stops and moves become turn based. First move is determined by stats and chance and the environment persists as normal, with movement in a grid.
+The player can engage combat with anyone and permanently kill them.
+
+Npc can only say a few phrases and uses them to mean different things. One time tries to warn of danger but is cryptic
+
+Elderly player has his 'staff' taken away and e falls down. Casts magic to get it back saying 'did you think my walking stick was magic'
+
+Main character changes looks gradually throughout the game. Later they are transported back in time and revealed to have been acting as a minor character at the start of the game
+
+Battle system. Temporary dodge stamina comes up, must read enemy telegraphs and move the right way. Back step uses a lot of stamina. If stamina runs out player can't move and gets hit. Dodging wrong way may mean they get hit. Left right back duck 
+
+Smart enemy Ai. Random choice to dodge certain ways. The more times player does an attack the more likely the enemy is to dodge in anticipation of that attack. This coupled with potential damage.
+
+A stew of potentially poisonous fruit. The fruits grow in pairs but this is not clear unless the player learns it elsewhere. They know this stew has had all pieces tested but one and someone is about to eat it.
+
+Health and stamina are same bar. Taking hits and attacking use up notches. At zero player is stunned. Recover notches per turn based on stats. Can be stun locked if boss does damage equal to recovery
+
+City with universal basic income?
+
+Very confident dialogue options carry because the player speaks without emotion or tone, because they are speaking in text. This carries into the game world as hard to read.
+
+All bosses get killed, saved or join party (hard)
+
+Were you dropped into this world (number of days played) ago? (Because the player knows nothing about the land except his home village) why'd it take you this long to get here? (If started game 4 days ago or more)
+
+Npc you can't see unless you've done something somewhere else 
+
+Statues of great heroes throughout the game; they were actually petrified in some great battle and can be awoken. The statues mysteriously vanish and the heroes catch up with the player at some point, with kind or ill intent
+
+=====================================================
+BOOTSTRAP BILLY
+=====================================================
+
+Player is a singleton which bootstraps themselves every time they die. They go back in time to be their own father/mother and conceive themselves. Then, because this new version has parented the next version they cease to exist because they have changed the future, the future where they grow up and come back. Because what determined that has been changed it has to play out again in order to exist again.
+Leave him all your equipment and pass on powers genetically.
+
+How come the conception happens in every timeline even when prior events change? Space time or multiple universe threads twist like a ponytail and converge at that point maybe. Maybe the mother is a powerful beast of time.
+The final boss is encountered many times throughout the game but can only be killed once many objects/beings have been collected/destroyed. He/she toys with the player until becoming frighteningly aware of their mortality.
+The identity of the boss is some revelation - they are the player's son eg but better than that.
+
+Always start at the same point in the present and go back a number of years depending on how far you get. Change events of past.
+
+Maybe number of years travelled back depends on how strong you are? So you can do any area you like but you have to do a lot to get back far enough. But a later area on its own could be worth several early areas.
+
+Dying returns you to a checkpoint. Dying again without killing what killed you causes game over, sent back with nothing.
+
+Choose to go back at any point (or any checkpoint?) with what you have.
+
+Inventory where items have size, have to fit them in like a puzzle. A to grab and move, B to remove to the border and be dropped when exiting inventory.
+
+Leave money to mother to have chests spawn at the start.
+
+All bosses have same tell for each attack but slightly different?
+
+Can stagger bosses by hitting them a lot
+
+Static like the game is a VHS playing. Rainbow screen when you die.
+
+Players actions are the events of a VHS tape.
+
+Weapons are attachments for player's missing hand.
+
+A curse causes you to go back in time and prevent the hand from going missing?
+
+Elemental damage with lots of elements like Pokémon. Weaknesses etc.
