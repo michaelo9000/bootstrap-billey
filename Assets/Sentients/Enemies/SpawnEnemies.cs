@@ -14,7 +14,7 @@ public class SpawnEnemies : MonoBehaviour {
 
     public void SpawnEnemy()
     {
-        if(myBaby == null)
-            myBaby = Instantiate(enemyPrefab, gameObject.transform);
+        if (myBaby == null)
+            myBaby = Instantiate(enemyPrefab);
     }
 }

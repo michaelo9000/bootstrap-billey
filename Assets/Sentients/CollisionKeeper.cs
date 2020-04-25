@@ -7,37 +7,35 @@ using UnityEngine;
 public class CollisionKeeper : MonoBehaviour {
 
     // Perfectly acceptable for this to be null - that just means that this game object does not do damage.
-    DoesDamage _DoesDamage;
+    Weapon _DoesDamage;
 
     public class Collision
     {
-        public GameObject gameObject { get; set; }
+        public int instanceId { get; set; }
         public bool isColliding { get; set; }
-        public bool isEnemy { get; set; }
+        public bool isDamageable { get; set; }
         public bool isPlatform { get; set; }
-        public float healthHeld { get; set; }
-        public Collision(GameObject obj, bool _isEnemy, bool _isPlatform)
+        public Collision(int id, bool _isDamageable, bool _isPlatform)
         {
-            gameObject = obj;
+            instanceId = id;
             isColliding = true;
-			isEnemy = _isEnemy;
+			isDamageable = _isDamageable;
 			isPlatform = _isPlatform;
-            healthHeld = 0;
         }
     }
 
     private void Start()
     {
-        _DoesDamage = GetComponent<DoesDamage>();
+        _DoesDamage = GetComponent<Weapon>();
     }
 
     private List<Collision> Collisions = new List<Collision>();
 
-    private int GetIndexOfCollision(GameObject obj)
+    private int GetIndexOfCollision(int id)
     {
         for (int i = 0; i < Collisions.Count; i++)
         {
-            if (Collisions[i].gameObject == obj)
+            if (Collisions[i].instanceId == id)
             {
                 return i;
             }
@@ -45,11 +43,11 @@ public class CollisionKeeper : MonoBehaviour {
         return -1;
     }
 
-    public Collision GetCollisionWithGameObject(GameObject obj)
+    public Collision GetCollisionFromID(int id)
     {
         for (int i = 0; i < Collisions.Count; i++)
         {
-            if (Collisions[i].gameObject == obj)
+            if (Collisions[i].instanceId == id)
             {
                 return Collisions[i];
             }
@@ -62,18 +60,13 @@ public class CollisionKeeper : MonoBehaviour {
         return Collisions[index];
     }
 
-    public void UpdateCollisionWithGameObject(GameObject obj, Collision updatedCollision)
-    {
-        var index = GetIndexOfCollision(obj);
-        Collisions[index] = updatedCollision;
-    }
-
+    // This has to be the only place that collisions are handled for every object, or we get weird timing results.
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Collision storedCollision;
 
-        var obj = collision.gameObject;
-        var index = GetIndexOfCollision(obj);
+        var id = collision.gameObject.GetInstanceID();
+        var index = GetIndexOfCollision(id);
 
         if (index > -1)
         {
@@ -82,16 +75,23 @@ public class CollisionKeeper : MonoBehaviour {
         }
         else
         {
-            storedCollision = new Collision(obj, obj.GetComponent<HealthAndDamage>() != null, true);
+            storedCollision = new Collision
+            (
+                id, 
+                collision.gameObject.GetComponent<HealthManager>() != null, 
+                // Everything is a platform??
+                true
+            );
             Collisions.Add(storedCollision);
         }
-        if (_DoesDamage != null)
-            _DoesDamage.DamageCollision(storedCollision);
+
+        if (_DoesDamage != null && storedCollision.isDamageable)
+            _DoesDamage.DamageCollision(collision.gameObject);
     }
 
     private void OnTriggerExit2D(Collider2D collision)    
     {
-        var i = GetIndexOfCollision(collision.gameObject);
+        var i = GetIndexOfCollision(collision.gameObject.GetInstanceID());
         if(i > -1)
         {
             Collisions[i].isColliding = false;

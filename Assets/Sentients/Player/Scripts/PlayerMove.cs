@@ -24,20 +24,23 @@ public class PlayerMove : MonoBehaviour
 
     public void Move(float h)
     {
-        // If the player is rolling, set 'h' to its max value
-        if (stature == Stature.rolling) 
-            h = 1 * transform.localScale.x;
-        // Define player's velocity 
-        if(h != 0)
+        if (References.CanMove)
         {
-            var moveSpeedMod = stature == Stature.ducked || stature == Stature.dropped ? .2f : 1;
-            References._Rigidbody2D.velocity = new Vector2(h * moveSpeed * moveSpeedMod * (rollSpeedMod ?? 1), References._Rigidbody2D.velocity.y);
+            // If the player is rolling, set 'h' to its max value
+            if (stature == Stature.rolling)
+                h = 1 * transform.localScale.x;
+            // Define player's velocity 
+            if (h != 0)
+            {
+                var moveSpeedMod = stature == Stature.ducked || stature == Stature.dropped ? .2f : 1;
+                References._Rigidbody2D.velocity = new Vector2(h * moveSpeed * moveSpeedMod * (rollSpeedMod ?? 1), References._Rigidbody2D.velocity.y);
+            }
+            // Check if the player's facing direction needs to be flipped
+            if (h != 0 && Mathf.Sign(h) != transform.localScale.x)
+            {
+                transform.localScale = new Vector3(Mathf.Sign(h), 1, 1);
+            }
         }
-        // Check if the player's facing direction needs to be flipped
-        if (h != 0 && Mathf.Sign(h) != transform.localScale.x)
-            transform.localScale = new Vector3(Mathf.Sign(h), 1, 1);
-
-        References._Surrogate.SetPosition();
     }
 
     public void DuckEvade()
@@ -50,11 +53,8 @@ public class PlayerMove : MonoBehaviour
         ModifyStature(Stature.dropped);
     }
 
-    // Todo this should abort if it gets called while the player is already rolling
     public void RollEvade()
     {
-        //if(stature == Stature.rolling)
-        //    return;
         ModifyStature(Stature.rolling);
         StartCoroutine(IRoll());
     }
@@ -66,7 +66,7 @@ public class PlayerMove : MonoBehaviour
             frames++;
             // Has to be based on 1, as it is a multiplier.
             rollSpeedMod = 1 + ( rollSpeedModConst - rollSpeedModConst * frames / rollFrames );
-            yield return References.FrameWait;
+            yield return StaticGlobalReferences.FrameWait;
         }
         rollSpeedMod = null;
         if (Input.GetButton("Evade"))
@@ -82,6 +82,8 @@ public class PlayerMove : MonoBehaviour
     {
         stature = newStature;
         DisableColliders();
+        //References._DamageManager.isInvulnerable = false;
+        Physics2D.IgnoreLayerCollision(8, 9, false);
         switch (stature)
         {
             case Stature.dropped:
@@ -95,6 +97,8 @@ public class PlayerMove : MonoBehaviour
                 References.DuckCollider.enabled = true;
                 break;
             case Stature.rolling:
+                //References._DamageManager.isInvulnerable = true;
+                Physics2D.IgnoreLayerCollision(8, 9, true);
                 References._SpriteRenderer.sprite = References.RollSprite;
                 References._SpriteRenderer.color = Color.cyan;
                 References.RollCollider.enabled = true;

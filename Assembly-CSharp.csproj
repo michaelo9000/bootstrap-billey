@@ -63,26 +63,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CollisionKeeper.cs" />
-    <Compile Include="Assets\Enemies\SpawnEnemies.cs" />
-    <Compile Include="Assets\Enemies\Standard\EnemyAttack.cs" />
-    <Compile Include="Assets\Enemies\Standard\EnemyControl.cs" />
-    <Compile Include="Assets\Enemies\Standard\EnemyMove.cs" />
-    <Compile Include="Assets\Enemies\Standard\EnemyReferences.cs" />
+    <Compile Include="Assets\Game\Extensions.cs" />
     <Compile Include="Assets\Game\FrameCounter.cs" />
-    <Compile Include="Assets\Game\GlobalReferences.cs" />
+    <Compile Include="Assets\Game\GameLord.cs" />
+    <Compile Include="Assets\Game\HUD.cs" />
+    <Compile Include="Assets\Game\HarmOnTouch.cs" />
     <Compile Include="Assets\Game\LerpCamera.cs" />
     <Compile Include="Assets\Game\RepeatingEvents.cs" />
-    <Compile Include="Assets\Game\Unused\GameLord.cs" />
+    <Compile Include="Assets\Game\StaticGlobalReferences.cs" />
     <Compile Include="Assets\Game\Unused\MoveCamera.cs" />
-    <Compile Include="Assets\HealthAndDamage.cs" />
-    <Compile Include="Assets\Player\Scripts\PlayerAttack.cs" />
-    <Compile Include="Assets\Player\Scripts\PlayerControl.cs" />
-    <Compile Include="Assets\Player\Scripts\PlayerMove.cs" />
-    <Compile Include="Assets\Player\Scripts\PlayerReferences.cs" />
-    <Compile Include="Assets\SentientReferences.cs" />
-    <Compile Include="Assets\Surrogate.cs" />
-    <Compile Include="Assets\Weapons\Scripts\DoesDamage.cs" />
+    <Compile Include="Assets\Sentients\AttackManager.cs" />
+    <Compile Include="Assets\Sentients\CollisionKeeper.cs" />
+    <Compile Include="Assets\Sentients\DamageManager.cs" />
+    <Compile Include="Assets\Sentients\Enemies\EnemyControl.cs" />
+    <Compile Include="Assets\Sentients\Enemies\EnemyMove.cs" />
+    <Compile Include="Assets\Sentients\Enemies\EnemyReferences.cs" />
+    <Compile Include="Assets\Sentients\Enemies\SpawnEnemies.cs" />
+    <Compile Include="Assets\Sentients\HealthManager.cs" />
+    <Compile Include="Assets\Sentients\Player\Scripts\PlayerControl.cs" />
+    <Compile Include="Assets\Sentients\Player\Scripts\PlayerMove.cs" />
+    <Compile Include="Assets\Sentients\Player\Scripts\PlayerReferences.cs" />
+    <Compile Include="Assets\Sentients\SentientReferences.cs" />
+    <Compile Include="Assets\Sentients\Surrogate.cs" />
+    <Compile Include="Assets\Weapons\Scripts\Weapon.cs" />
+    <Compile Include="Assets\Weapons\Shield\Shield.cs" />
+    <Compile Include="Assets\Weapons\Short sword\ShortSword.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/micha/Documents/jumpo/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

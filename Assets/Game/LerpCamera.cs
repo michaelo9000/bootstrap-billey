@@ -2,23 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LerpCamera : MonoBehaviour {
-
+public class LerpCamera : MonoBehaviour 
+{
     public float distanceAhead;
     public float distanceAbove;
     public float movementLerp;
-    public Transform player;
     Rigidbody2D myBody;
 
     // Update is called once per frame
-    void Start () {
+    void Start () 
+    {
         myBody = GetComponent<Rigidbody2D>();
     }
-    void FixedUpdate () {
+    void FixedUpdate () 
+    {
+        var player = StaticGlobalReferences._Player.transform;
         //get the difference, not the position
         var newPos = new Vector2(
             //player.x position + modify to be ahead of the player
-            (player.position.x + distanceAhead * player.localScale.x) - myBody.position.x,
+            player.position.x + distanceAhead * player.localScale.x - myBody.position.x,
             player.position.y + distanceAbove - myBody.position.y
         );
 
