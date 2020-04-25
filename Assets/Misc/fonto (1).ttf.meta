@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 71a8e41433532b54984df92528bcf701
+timeCreated: 1509149679
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: fonto
+  fontNames:
+  - fonto
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 33c6a12f0b0c1004cb45fb744e64e128, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
